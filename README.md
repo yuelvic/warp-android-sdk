@@ -55,7 +55,7 @@ WarpObject object = new WarpObject.Builder()
 
             @Override
             public void onSuccess(WarpResult result) {
-                if (result.getStatus == STATUS_SUCCESS) {
+                if (result.getStatus() == STATUS_SUCCESS) {
                     Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_SHORT);
                 }
             }
