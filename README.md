@@ -26,7 +26,7 @@ WarpObject object = new WarpObject.Builder()
 
             @Override
             public void onSuccess(WarpResult result) {
-                textView.setText(result.getResult.getCity());
+                textView.setText(result.getResult().getCity());
             }
         });
 ```
