@@ -17,7 +17,7 @@ WarpObject object = new WarpObject.Builder()
         .setClassName("location")
         .find(new WarpCallback() {
             @Override
-                public void onCompleted() {}
+            public void onCompleted() {}
 
             @Override
             public void onError(Throwable e) {
@@ -34,7 +34,7 @@ WarpObject object = new WarpObject.Builder()
 Adding **pointer**
 
 ```java
-addPointer(KEY, CLASSNAME, ID)
+addPointer(KEY, CLASSNAME, ID);
 ```
 
 ```java
@@ -46,7 +46,7 @@ WarpObject object = new WarpObject.Builder()
         .addPointer("user", "user", getCurrentUser.getID())
         .save(new WarpCallback() {
             @Override
-                public void onCompleted() {}
+            public void onCompleted() {}
 
             @Override
             public void onError(Throwable e) {
@@ -61,3 +61,19 @@ WarpObject object = new WarpObject.Builder()
             }
         });
 ```
+
+For **PUT** method, use the overload save method
+
+```java
+save(ID, CALLBACK);
+```
+
+##Basic CRUD methods
+
+| Method    | Java method               |
+|-----------|---------------------------|
+| GET       | find(callback)            |
+| GET       | findById(id, callback)    |
+| POST      | save(callback)            |
+| PUT       | save(id, callback)        |
+| DELETE    | destroy(id, callback)     |

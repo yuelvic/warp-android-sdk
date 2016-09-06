@@ -25,19 +25,20 @@ public interface WarpService {
                                   @Body HashMap<String, Object> body);
     @GET("{className}")
     Observable<WarpResult> findAll(@Path("className") String endpoint,
-                                                @HeaderMap HashMap<String, String> header,
-                                                @QueryMap HashMap<String, Object> constraint);
-    @GET("{endpoint}/{id}")
-    Observable<HashMap<String, Object>> first(@HeaderMap HashMap<String, Object> header,
-                                                 @Path(value = "endpoint", encoded = true) String endpoint,
-                                                 @Path("id") int id);
-    @PUT("{endpoint}/{id}")
-    Observable<HashMap<String, Object>> update(@HeaderMap HashMap<String, Object> header,
-                                               @Path(value = "endpoint", encoded = true) String endpoint,
-                                               @Path("id") int id, @Body HashMap<String, Object> body);
-    @DELETE("{endpoint}/{id}")
-    Observable<HashMap<String, Object>> delete(@HeaderMap HashMap<String, Object> header,
-                                               @Path(value = "endpoint", encoded = true) String endpoint,
-                                               @Path("id") int id);
+                                   @HeaderMap HashMap<String, String> header,
+                                   @QueryMap HashMap<String, Object> constraint);
+    @GET("{className}/{id}")
+    Observable<WarpResult> first(@Path(value = "endpoint", encoded = true) String endpoint,
+                                 @HeaderMap HashMap<String, String> header,
+                                 @Path("id") int id);
+    @PUT("{className}/{id}")
+    Observable<WarpResult> update(@Path(value = "endpoint", encoded = true) String endpoint,
+                                  @HeaderMap HashMap<String, String> header,
+                                  @Path("id") int id,
+                                  @Body HashMap<String, Object> body);
+    @DELETE("{className}/{id}")
+    Observable<WarpResult> delete(@Path(value = "endpoint", encoded = true) String endpoint,
+                                  @HeaderMap HashMap<String, String> header,
+                                  @Path("id") int id);
 
 }

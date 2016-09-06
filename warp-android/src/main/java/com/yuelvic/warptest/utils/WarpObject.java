@@ -50,14 +50,26 @@ public class WarpObject {
             return this;
         }
 
-        public void insert(WarpCallback callback) {
+        public WarpObject save(WarpCallback callback) {
             object = create();
-            object.insert(callback);
+            object.save(callback);
+            return object;
+        }
+
+        public WarpObject save(int id, WarpCallback callback) {
+            object = create();
+            object.save(id, callback);
+            return object;
         }
 
         public WarpObject find(WarpCallback callback) {
             object = create();
             object.find(callback);
+            return object;
+        }
+
+        public WarpObject destroy(WarpCallback callback) {
+            object = create();
             return object;
         }
 
@@ -74,8 +86,30 @@ public class WarpObject {
         this.header.put("X-Warp-API-Key", warp.getApiKey());
     }
 
-    public void insert(final WarpCallback callback) {
+    public void save(final WarpCallback callback) {
         warp.getService().insert(className, header, body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WarpResult>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e);
+                    }
+
+                    @Override
+                    public void onNext(WarpResult result) {
+                        callback.onSuccess(result);
+                    }
+                });
+    }
+
+    public void save(int id, final WarpCallback callback) {
+        warp.getService().update(className, header, id, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WarpResult>() {
@@ -98,6 +132,50 @@ public class WarpObject {
 
     public void find(final WarpCallback callback) {
         warp.getService().findAll(className, header, body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WarpResult>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e);
+                    }
+
+                    @Override
+                    public void onNext(WarpResult result) {
+                        callback.onSuccess(result);
+                    }
+                });
+    }
+
+    public void findById(int id, final WarpCallback callback) {
+        warp.getService().first(className, header, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<WarpResult>() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(e);
+                    }
+
+                    @Override
+                    public void onNext(WarpResult result) {
+                        callback.onSuccess(result);
+                    }
+                });
+    }
+
+    public void destroy(int id, final WarpCallback callback) {
+        warp.getService().delete(className, header, id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<WarpResult>() {
