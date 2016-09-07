@@ -5,7 +5,7 @@ Android SDK for <a href="https://github.com/jakejosol/warp-server">warp-server</
 Warp must be initialized **once** in your project.
 
 ```java
-Warp.initialize(BASE_URL, API_KEY);
+Warp.initialize(CONTEXT, BASE_URL, API_KEY);
 ```
 
 ## Usage 
@@ -76,4 +76,17 @@ save(ID, CALLBACK);
 | GET       | findById(id, callback)    |
 | POST      | save(callback)            |
 | PUT       | save(id, callback)        |
-| DELETE    | destroy(id, callback)     |
+| DELETE    | destroy(id, callback)     
+
+##User API
+
+Logging In
+
+```java
+WarpUser.login(USERNAME, PASSWORD, CALLBACK);
+```
+
+Getting current user
+```java
+WarpUser.getCurrentUser();
+```
