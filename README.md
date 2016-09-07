@@ -1,5 +1,5 @@
 # warp-android-sdk
-Android SDK for <a href="https://github.com/jakejosol/warp-server">warp-server</a>.
+Android SDK for <a href="https://github.com/jakejosol/warp-server" target="_blank">warp-server</a>.
 
 ## Setup
 Warp must be initialized **once** in your project.
